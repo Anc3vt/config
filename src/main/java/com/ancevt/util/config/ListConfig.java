@@ -32,11 +32,22 @@ public class ListConfig implements Config {
 
     private final List<KeyValue> list;
     private final Map<String, String> map;
+    private Path defaultPath;
 
     public ListConfig() {
         configChangeListeners = new ArrayList<>();
         list = new ArrayList<>();
         map = new HashMap<>();
+    }
+
+    public ListConfig(Path defaultPath) {
+        this();
+        this.defaultPath = defaultPath;
+    }
+
+    public ListConfig(String defaultPath) {
+        this();
+        this.defaultPath = Path.of(defaultPath);
     }
 
     @Override
@@ -52,6 +63,16 @@ public class ListConfig implements Config {
     @Override
     public void clearConfigChangeListeners() {
         configChangeListeners.clear();
+    }
+
+    @Override
+    public void setDefaultPath(Path path) {
+        this.defaultPath = path;
+    }
+
+    @Override
+    public void setDefaultPath(String path) {
+        this.defaultPath = Path.of(path);
     }
 
     @Override
@@ -73,6 +94,12 @@ public class ListConfig implements Config {
     }
 
     @Override
+    public void store() throws IOException {
+        if (defaultPath == null) throw new ConfigException("default path not defined");
+        store(defaultPath);
+    }
+
+    @Override
     public void load(@NotNull InputStream inputStream) throws IOException {
         parse(new String(inputStream.readAllBytes(), StandardCharsets.UTF_8));
     }
@@ -85,6 +112,12 @@ public class ListConfig implements Config {
     @Override
     public void load(Path path) throws IOException {
         parse(Files.readString(path));
+    }
+
+    @Override
+    public void load() throws IOException {
+        if (defaultPath == null) throw new ConfigException("default path not defined");
+        load(defaultPath);
     }
 
     @Override

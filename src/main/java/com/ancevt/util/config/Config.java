@@ -15,14 +15,18 @@ public interface Config {
     void removeConfigChangeListener(BiConsumer<String, String> listener);
     void clearConfigChangeListeners();
 
+    void setDefaultPath(String path);
+    void setDefaultPath(Path path);
 
     void store(OutputStream outputStream) throws IOException;
     void store(String path) throws IOException;
     void store(Path path) throws IOException;
+    void store() throws IOException;
 
     void load(InputStream inputStream) throws IOException;
     void load(String path) throws IOException;
     void load(Path path) throws IOException;
+    void load() throws IOException;
 
     void parse(String source);
 

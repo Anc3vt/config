@@ -6,7 +6,7 @@
 
     <groupId>com.ancevt.util</groupId>
     <artifactId>config</artifactId>
-    <version>1.0</version>
+    <version>1.0.1</version>
 
     <name>config</name>
     <url>https://github.com/Anc3vt/config</url>
