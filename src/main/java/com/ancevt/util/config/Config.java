@@ -48,7 +48,7 @@ public interface Config {
 
     void parse(String source);
 
-    void setProperty(String key, String value);
+    void setProperty(String key, Object value);
 
     String getProperty(String key);
     String getProperty(String key, String defaultValue);

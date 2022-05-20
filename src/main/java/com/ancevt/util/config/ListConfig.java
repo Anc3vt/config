@@ -164,13 +164,13 @@ public class ListConfig implements Config {
     }
 
     @Override
-    public void setProperty(String key, String value) {
-        map.put(key, value);
+    public void setProperty(String key, Object value) {
+        map.put(key, String.valueOf(value));
         getPairOptional(key).ifPresentOrElse(
-                kv -> kv.value = value,
-                () -> list.add(new KeyValue(key, value))
+                kv -> kv.value = String.valueOf(value),
+                () -> list.add(new KeyValue(key, String.valueOf(value)))
         );
-        configChangeListeners.forEach(l -> l.accept(key, value));
+        configChangeListeners.forEach(l -> l.accept(key, String.valueOf(value)));
     }
 
     @Override
