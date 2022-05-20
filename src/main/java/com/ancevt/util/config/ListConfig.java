@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.Optional;
 import java.util.StringTokenizer;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 import static java.lang.Byte.parseByte;
 import static java.lang.Double.parseDouble;
@@ -278,13 +279,13 @@ public class ListConfig implements Config {
     }
 
     @Override
-    public void ifContains(String key, BiConsumer<String, String> biConsumer) {
-        getPairOptional(key).ifPresent(kv -> biConsumer.accept(kv.key, kv.value));
+    public void ifContains(String key, Consumer<String> valueConsumer) {
+        getPairOptional(key).ifPresent(kv -> valueConsumer.accept(kv.value));
     }
 
     @Override
-    public void ifContainsOrElse(String key, BiConsumer<String, String> biConsumer, Runnable orElseRunnable) {
-        getPairOptional(key).ifPresentOrElse(kv -> biConsumer.accept(kv.key, kv.value), orElseRunnable);
+    public void ifContainsOrElse(String key, Consumer<String> valueConsumer, Runnable orElseRunnable) {
+        getPairOptional(key).ifPresentOrElse(kv -> valueConsumer.accept(kv.value), orElseRunnable);
     }
 
     @Override

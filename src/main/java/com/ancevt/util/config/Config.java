@@ -23,6 +23,7 @@ import java.io.OutputStream;
 import java.nio.file.Path;
 import java.util.Map;
 import java.util.function.BiConsumer;
+import java.util.function.Consumer;
 
 public interface Config {
 
@@ -69,9 +70,9 @@ public interface Config {
 
     boolean contains(String key);
 
-    void ifContains(String key, BiConsumer<String, String> biConsumer);
+    void ifContains(String key, Consumer<String> valueConsumer);
 
-    void ifContainsOrElse(String key, BiConsumer<String, String> biConsumer, Runnable orElseRunnable);
+    void ifContainsOrElse(String key, Consumer<String> valueConsumer, Runnable orElseRunnable);
 
     Map<String, String> toMap();
 
