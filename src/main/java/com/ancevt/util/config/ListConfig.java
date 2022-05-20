@@ -264,8 +264,10 @@ public class ListConfig implements Config {
 
     private Optional<KeyValue> getPairOptional(String key) {
         for (KeyValue kv : list) {
-            if (kv.key.equals(key)) {
-                return Optional.of(kv);
+            if(!kv.isComment() && !kv.isEmpty()) {
+                if (kv.key.equals(key)) {
+                    return Optional.of(kv);
+                }
             }
         }
         return Optional.empty();
@@ -301,10 +303,14 @@ public class ListConfig implements Config {
         }
 
         static @NotNull KeyValue parse(String line) {
-            StringTokenizer stringTokenizer = new StringTokenizer(line, "=");
-            String key = stringTokenizer.nextToken().trim();
-            String value = stringTokenizer.nextToken().trim();
-            return new KeyValue(key, value);
+            if(line.contains("=")) {
+                StringTokenizer stringTokenizer = new StringTokenizer(line, "=");
+                String key = stringTokenizer.nextToken().trim();
+                String value = stringTokenizer.nextToken().trim();
+                return new KeyValue(key, value);
+            } else {
+                throw new ConfigException("Parse error, line: " + line);
+            }
         }
 
         @Override
