@@ -49,14 +49,6 @@
 
     <repositories>
         <repository>
-            <id>args2-mvn-repo</id>
-            <url>https://raw.github.com/Anc3vt/args2/mvn-repo/</url>
-            <snapshots>
-                <enabled>true</enabled>
-                <updatePolicy>always</updatePolicy>
-            </snapshots>
-        </repository>
-        <repository>
             <id>texttable-mvn-repo</id>
             <url>https://raw.github.com/Anc3vt/texttable/mvn-repo/</url>
             <snapshots>

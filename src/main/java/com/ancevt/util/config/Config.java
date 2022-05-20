@@ -56,5 +56,5 @@ public interface Config {
 
     String stringify();
 
-    String toFormattedString();
+    String toFormattedEffectiveString(boolean decorated);
 }

@@ -1,6 +1,7 @@
 package com.ancevt.util.config;
 
 
+import com.ancevt.util.texttable.TextTable;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
@@ -258,13 +259,17 @@ public class ListConfig implements Config {
     }
 
     @Override
-    public String toFormattedString() {
-        return null;
+    public String toFormattedEffectiveString(boolean decorated) {
+        TextTable textTable = new TextTable(decorated, "Key", "Value");
+        list.forEach(kv -> {
+            if (!kv.isComment() && !kv.isEmpty()) textTable.addRow(kv.key, kv.value);
+        });
+        return textTable.render();
     }
 
     private Optional<KeyValue> getPairOptional(String key) {
         for (KeyValue kv : list) {
-            if(!kv.isComment() && !kv.isEmpty()) {
+            if (!kv.isComment() && !kv.isEmpty()) {
                 if (kv.key.equals(key)) {
                     return Optional.of(kv);
                 }
@@ -303,7 +308,7 @@ public class ListConfig implements Config {
         }
 
         static @NotNull KeyValue parse(String line) {
-            if(line.contains("=")) {
+            if (line.contains("=")) {
                 StringTokenizer stringTokenizer = new StringTokenizer(line, "=");
                 String key = stringTokenizer.nextToken().trim();
                 String value = stringTokenizer.nextToken().trim();

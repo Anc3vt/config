@@ -3,6 +3,8 @@ package com.ancevt.util.config;
 import org.junit.jupiter.api.Test;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.junit.MatcherAssert.assertThat;
@@ -48,6 +50,10 @@ public class ListConfigTest {
         listConfigToLoad.load("test.tmp");
 
         assertThat(listConfigToLoad.getProperty("second.key"), is("localhost:2255"));
+
+        Files.deleteIfExists(Path.of("test.tmp"));
+
+        System.out.println(listConfigToLoad.toFormattedEffectiveString(false));
     }
 
 }
