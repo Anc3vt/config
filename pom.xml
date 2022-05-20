@@ -76,16 +76,6 @@
 
     <dependencies>
         <dependency>
-            <groupId>com.ancevt.commons</groupId>
-            <artifactId>ancevt-commons</artifactId>
-            <version>${commons.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.ancevt.util</groupId>
-            <artifactId>args</artifactId>
-            <version>${args.version}</version>
-        </dependency>
-        <dependency>
             <groupId>com.ancevt.util</groupId>
             <artifactId>texttable</artifactId>
             <version>${texttable.version}</version>
