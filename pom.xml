@@ -30,9 +30,6 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>11</java.version>
 
-        <github.global.server>github</github.global.server>
-        <github.maven-plugin>0.12</github.maven-plugin>
-
         <commons.version>1.0.0.3</commons.version>
         <args.version>2.0.4</args.version>
         <texttable.version>0.0.1</texttable.version>
