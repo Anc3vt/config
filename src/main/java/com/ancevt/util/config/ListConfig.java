@@ -262,7 +262,7 @@ public class ListConfig implements Config {
             KeyValue kv = list.get(i);
             if (key.equals(kv.key)) {
                 list.remove(i);
-                configChangeListeners.forEach(l->l.accept(key, REMOVED));
+                configChangeListeners.forEach(l -> l.accept(key, REMOVED));
                 break;
             }
         }
@@ -317,6 +317,11 @@ public class ListConfig implements Config {
             if (!kv.isComment() && !kv.isEmpty()) textTable.addRow(kv.key, kv.value);
         });
         return textTable.render();
+    }
+
+    @Override
+    public boolean fileExists() {
+        return Files.exists(defaultPath);
     }
 
     private Optional<KeyValue> getPairOptional(String key) {

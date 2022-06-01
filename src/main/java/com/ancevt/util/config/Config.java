@@ -79,4 +79,6 @@ public interface Config {
     String stringify();
 
     String toFormattedEffectiveString(boolean decorated);
+
+    boolean fileExists();
 }
